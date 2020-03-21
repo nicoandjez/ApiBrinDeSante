@@ -1,0 +1,16 @@
+{
+  "name": "api_brindesante",
+  "version": "0.1.0",
+  "description": "API BrinDeSante on Docker",
+  "author": "Nicolas ESSE <nicolas.esse@gmail.com>",
+  "main": "ApiBrinDeSante.js",
+  "scripts": {
+    "start": "node ApiBrinDeSante.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.1",
+    "mongoose": "^5.9.5"
+  }
+}
