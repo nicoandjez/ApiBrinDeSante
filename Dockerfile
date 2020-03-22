@@ -1,5 +1,5 @@
 #NIE Je pars d'une image docker node en version 10
-FROM node:10
+FROM node:10-alpine
 
 #Repertoire de mon application
 WORKDIR /app
