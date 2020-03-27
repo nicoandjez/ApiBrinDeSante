@@ -13,7 +13,7 @@ router
 
   //NIE GET monurl/fiches retoune la liste des fiches.
   .get(function(req, res) {
-    fiches.find(function(err, fiches) {
+    fiches.find({}, "_id titre", function(err, fiches) {
       if (err) {
         res.send(err);
       }
