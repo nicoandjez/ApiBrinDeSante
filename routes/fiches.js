@@ -19,7 +19,6 @@ router
       if (err) {
         res.send(err);
       }
-      console.log(fiches);
       res.json(fiches);
     });
   })
