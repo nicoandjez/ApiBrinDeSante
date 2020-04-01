@@ -51,6 +51,10 @@ app.use(myRouterMenu);
 const fichesRouter = require("./routes/fiches");
 app.use("/fiches", fichesRouter);
 
+//On importe le module gérant les routes correspondantes à /fiches/
+const rechercheRouter = require("./routes/recherche");
+app.use("/recherche", rechercheRouter);
+
 // Démarrer le serveur
 app.listen(port, () => {
   console.log(

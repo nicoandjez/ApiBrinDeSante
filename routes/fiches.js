@@ -13,7 +13,19 @@ router
 
   //NIE GET monurl/fiches retoune la liste des fiches.
   .get(function(req, res) {
-    fiches.find({}, "_id titre", function(err, fiches) {
+    //est ce que j'ai un paramètre?
+    var texteRecherche = req.query.recherche;
+
+    var filtreRecherche = {};
+
+    if (texteRecherche) {
+      texteRecherche = texteRecherche.replace(" ", "|");
+      texteRecherche = new RegExp(texteRecherche, "i");
+      filtreRecherche = { titre: texteRecherche };
+      console.log(filtreRecherche);
+    }
+
+    fiches.find(filtreRecherche, "_id titre", function(err, fiches) {
       if (err) {
         res.send(err);
       }
@@ -24,10 +36,9 @@ router
   //NIE POST permet d'ajouter une fiche
   .post(function(req, res) {
     var maFiche = new fiches();
-    console.log(req.body);
     maFiche.titre = req.body.titre;
 
-    //Insertion dans la collection fiches de la base MongoDB
+    // Insertion dans la collection fiches de la base MongoDB
     maFiche.save(function(err) {
       if (err) {
         res.send(err);
@@ -39,7 +50,7 @@ router
     });
   });
 
-//NIE route https://monurl/fiches:ficheid
+// route https://monurl/fiches:ficheid
 router
   .route("/:fiche_id")
 
