@@ -19,13 +19,18 @@ router
     var filtreRecherche = {};
 
     if (texteRecherche) {
-      texteRecherche = texteRecherche.replace(" ", "|");
+      texteRecherche = texteRecherche.replace(/ /gi, "|");
       texteRecherche = new RegExp(texteRecherche, "i");
-      filtreRecherche = { titre: texteRecherche };
+      filtreRecherche = {
+        $or: [{ titre: texteRecherche }, { description: texteRecherche }]
+      };
       console.log(filtreRecherche);
     }
 
-    fiches.find(filtreRecherche, "_id titre", function(err, fiches) {
+    fiches.find(filtreRecherche, "_id titre description", function(
+      err,
+      fiches
+    ) {
       if (err) {
         res.send(err);
       }
