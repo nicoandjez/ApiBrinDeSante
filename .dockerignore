@@ -1,4 +1,5 @@
 #Permet d'ignorer de contenu de mon image docker
 node_modules
 npm-debug.log
-
+ApiBrinDeSante.code-workspace
+.gitignore
