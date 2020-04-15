@@ -34,13 +34,20 @@ router
         }
         res.json(fiches);
       })
-      .sort((titre: 1));
+      .sort({ titre: 1 });
   })
 
   //NIE POST permet d'ajouter une fiche
   .post(function (req, res) {
     var maFiche = new fiches();
     maFiche.titre = req.body.titre;
+    maFiche.titre_fiche = req.body.titre_fiche;
+    maFiche.description = req.body.description;
+    maFiche.date_modif = new Date();
+    maFiche.symptomes = req.body.symptomes;
+    maFiche.conseils = req.body.conseils;
+    maFiche.aller_chez_le_medecin = req.body.aller_chez_le_medecin;
+    maFiche.articles = req.body.articles;
 
     // Insertion dans la collection fiches de la base MongoDB
     maFiche.save(function (err) {
@@ -60,9 +67,40 @@ router
 
   .get(function (req, res) {
     fiches.findById(req.params.fiche_id, function (err, fiches) {
-      if (err) res.send(err);
-      res.json(fiches);
+      if (err) {
+        res.send(err);
+        console.log(err);
+      } else {
+        res.json(fiches);
+      }
     });
+  })
+
+  .patch(function (req, res) {
+    var data = {
+      titre: req.body.titre,
+      titre_fiche: req.body.titre_fiche,
+      description: req.body.description,
+      date_modif: new Date(),
+      symptomes: req.body.symptomes,
+      conseils: req.body.conseils,
+      aller_chez_le_medecin: req.body.aller_chez_le_medecin,
+      articles: req.body.articles,
+    };
+
+    fiches.findByIdAndUpdate(
+      req.params.fiche_id,
+      data,
+      { new: true },
+      function (err, fiches) {
+        if (err) {
+          res.send(err);
+          console.log(err);
+        } else {
+          res.json(fiches);
+        }
+      }
+    );
   });
 
 // exporte le module routeur decrit dans ce fichier
