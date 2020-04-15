@@ -12,7 +12,7 @@ router
   .route("/")
 
   //NIE GET monurl/fiches retoune la liste des fiches.
-  .get(function(req, res) {
+  .get(function (req, res) {
     //est ce que j'ai un paramètre?
     var texteRecherche = req.query.recherche;
 
@@ -22,35 +22,34 @@ router
       texteRecherche = texteRecherche.replace(/ /gi, "|");
       texteRecherche = new RegExp(texteRecherche, "i");
       filtreRecherche = {
-        $or: [{ titre: texteRecherche }, { description: texteRecherche }]
+        $or: [{ titre: texteRecherche }, { description: texteRecherche }],
       };
       console.log(filtreRecherche);
     }
 
-    fiches.find(filtreRecherche, "_id titre description", function(
-      err,
-      fiches
-    ) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(fiches);
-    });
+    fiches
+      .find(filtreRecherche, "_id titre description", function (err, fiches) {
+        if (err) {
+          res.send(err);
+        }
+        res.json(fiches);
+      })
+      .sort((titre: 1));
   })
 
   //NIE POST permet d'ajouter une fiche
-  .post(function(req, res) {
+  .post(function (req, res) {
     var maFiche = new fiches();
     maFiche.titre = req.body.titre;
 
     // Insertion dans la collection fiches de la base MongoDB
-    maFiche.save(function(err) {
+    maFiche.save(function (err) {
       if (err) {
         res.send(err);
       }
       res.send({
         message: "Bravo, la fiche  est maintenant stockée en base de données",
-        id: maFiche.id
+        id: maFiche.id,
       });
     });
   });
@@ -59,8 +58,8 @@ router
 router
   .route("/:fiche_id")
 
-  .get(function(req, res) {
-    fiches.findById(req.params.fiche_id, function(err, fiches) {
+  .get(function (req, res) {
+    fiches.findById(req.params.fiche_id, function (err, fiches) {
       if (err) res.send(err);
       res.json(fiches);
     });
