@@ -13,6 +13,8 @@ var ficheSchema = new mongoose.Schema({
   conseils: String,
   aller_chez_le_medecin: String,
   articles: [{ titre: String, texte: String }],
+  image_url: String,
+  afficher_en_page_accueil: Boolean,
 });
 
 //je lie le modèle que je viens de créer à la collection Fiches

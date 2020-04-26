@@ -28,12 +28,16 @@ router
     }
 
     fiches
-      .find(filtreRecherche, "_id titre description", function (err, fiches) {
-        if (err) {
-          res.send(err);
+      .find(
+        filtreRecherche,
+        "_id titre description image_url afficher_en_page_accueil",
+        function (err, fiches) {
+          if (err) {
+            res.send(err);
+          }
+          res.json(fiches);
         }
-        res.json(fiches);
-      })
+      )
       .sort({ titre: 1 });
   })
 
@@ -48,6 +52,8 @@ router
     maFiche.conseils = req.body.conseils;
     maFiche.aller_chez_le_medecin = req.body.aller_chez_le_medecin;
     maFiche.articles = req.body.articles;
+    maFiche.image_url = req.body.image_url;
+    maFiche.afficher_en_page_accueil = req.body.afficher_en_page_accueil;
 
     // Insertion dans la collection fiches de la base MongoDB
     maFiche.save(function (err) {
@@ -86,6 +92,8 @@ router
       conseils: req.body.conseils,
       aller_chez_le_medecin: req.body.aller_chez_le_medecin,
       articles: req.body.articles,
+      image_url: req.body.image_url,
+      afficher_en_page_accueil: req.body.afficher_en_page_accueil,
     };
 
     fiches.findByIdAndUpdate(
