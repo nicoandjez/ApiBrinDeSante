@@ -3,3 +3,4 @@ node_modules
 npm-debug.log
 ApiBrinDeSante.code-workspace
 .gitignore
+.env.development

@@ -22,7 +22,7 @@ const optionsMongo = {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 };
 
 //NES Connexion à la base de donnée
@@ -31,7 +31,7 @@ mongoose
   .then(() => {
     console.log("Connectée à la base BrinDeSante");
   })
-  .catch(e => {
+  .catch((e) => {
     console.log("Erreur de connexion à la base : " + e);
   });
 
@@ -39,7 +39,7 @@ mongoose
 var myRouterMenu = express.Router();
 
 //description du routeur, .all valable pour tous les types de passages POST, GET, PUT....
-myRouterMenu.route("/").all(function(req, res) {
+myRouterMenu.route("/").all(function (req, res) {
   var message = "<h1>Bienvenue sur notre  API  Brin de santé</h1><br>";
   res.send(message);
 });
@@ -50,6 +50,13 @@ app.use(myRouterMenu);
 //On importe le module gérant les routes correspondantes à /fiches/
 const fichesRouter = require("./routes/fiches");
 app.use("/fiches", fichesRouter);
+
+//On importe le module gérant les routes correspondantes à /images/
+const imagesRouter = require("./routes/images");
+app.use("/images", imagesRouter);
+//NIE on rend le répertoire Upload accessible
+//! : créer une route spécifique par image
+app.use("/uploads", express.static("uploads"));
 
 // Démarrer le serveur
 app.listen(port, () => {
