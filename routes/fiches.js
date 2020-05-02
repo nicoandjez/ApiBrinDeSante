@@ -30,7 +30,7 @@ router
     fiches
       .find(
         filtreRecherche,
-        "_id titre description image_url afficher_en_page_accueil",
+        "_id titre description image_url afficher_en_page_accueil groupe",
         function (err, fiches) {
           if (err) {
             res.send(err);
@@ -54,6 +54,7 @@ router
     maFiche.articles = req.body.articles;
     maFiche.image_url = req.body.image_url;
     maFiche.afficher_en_page_accueil = req.body.afficher_en_page_accueil;
+    maFiche.groupe = req.body.groupe;
 
     // Insertion dans la collection fiches de la base MongoDB
     maFiche.save(function (err) {
@@ -94,6 +95,7 @@ router
       articles: req.body.articles,
       image_url: req.body.image_url,
       afficher_en_page_accueil: req.body.afficher_en_page_accueil,
+      groupe: req.body.groupe,
     };
 
     fiches.findByIdAndUpdate(
