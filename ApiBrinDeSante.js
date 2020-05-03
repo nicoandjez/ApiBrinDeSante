@@ -54,9 +54,10 @@ app.use("/fiches", fichesRouter);
 //On importe le module gérant les routes correspondantes à /images/
 const imagesRouter = require("./routes/images");
 app.use("/images", imagesRouter);
-//NIE on rend le répertoire Upload accessible
-//! : créer une route spécifique par image
-app.use("/uploads", express.static("uploads"));
+
+//On importe le module gérant les routes correspondantes à /param/
+const paramRouter = require("./routes/param");
+app.use("/param", paramRouter);
 
 // Démarrer le serveur
 app.listen(port, () => {
