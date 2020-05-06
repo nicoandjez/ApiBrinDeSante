@@ -13,24 +13,24 @@ router
 
   //NIE GET monurl/fiches retoune la liste des fiches.
   .get(function (req, res) {
-    //est ce que j'ai un paramètre?
-    var texteRecherche = req.query.recherche;
+    //est ce que j'ai un paramètre sur les fiches masquée?
+    var is_masque = req.query.is_masque;
 
-    var filtreRecherche = {};
+    var filtreRecherche = {
+      is_masque: { $ne: true },
+    };
 
-    if (texteRecherche) {
-      texteRecherche = texteRecherche.replace(/ /gi, "|");
-      texteRecherche = new RegExp(texteRecherche, "i");
-      filtreRecherche = {
-        $or: [{ titre: texteRecherche }, { description: texteRecherche }],
-      };
+    if (is_masque === "all") {
+      //texteRecherche = texteRecherche.replace(/ /gi, "|");
+      //texteRecherche = new RegExp(texteRecherche, "i");
+      filtreRecherche = {};
       console.log(filtreRecherche);
     }
 
     fiches
       .find(
         filtreRecherche,
-        "_id titre description image_url afficher_en_page_accueil groupe",
+        "_id titre description image_url afficher_en_page_accueil groupe is_masque",
         function (err, fiches) {
           if (err) {
             res.send(err);
@@ -55,6 +55,7 @@ router
     maFiche.image_url = req.body.image_url;
     maFiche.afficher_en_page_accueil = req.body.afficher_en_page_accueil;
     maFiche.groupe = req.body.groupe;
+    maFiche.is_masque = req.body.is_masque;
 
     // Insertion dans la collection fiches de la base MongoDB
     maFiche.save(function (err) {
@@ -96,6 +97,7 @@ router
       image_url: req.body.image_url,
       afficher_en_page_accueil: req.body.afficher_en_page_accueil,
       groupe: req.body.groupe,
+      is_masque: req.body.is_masque,
     };
 
     fiches.findByIdAndUpdate(
