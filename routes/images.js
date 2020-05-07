@@ -1,3 +1,6 @@
+//NIE pour enregistrer les pages consultées et les appels
+const logTraffic = require("../functions/LogTraffic");
+
 const router = require("express").Router();
 const fs = require("fs");
 //NIE import du model fiche
@@ -21,7 +24,8 @@ const upload = multer({ storage: storage });
 //NIE POST permet d'ajouter une image
 //NIE j'ajoute le middleware upload qui vient avec multer (.single = un fichier)
 router.post("/", upload.single("image_file"), function (req, res) {
-  console.log(req.file);
+  //NIE mesure de l'ouverture de la page
+  logTraffic("Site", "Ajout d'une image");
 
   const monImage = new images({
     _id: new mongoose.Types.ObjectId(),
@@ -51,6 +55,8 @@ router.get("/", function (req, res) {
     if (err) {
       res.send(err);
     } else {
+      //NIE mesure de l'ouverture de la page
+      logTraffic("Site", "Get images");
       res.send(images);
     }
   });
@@ -76,6 +82,8 @@ router.get("/:nom_image", function (req, res) {
       console.log(err);
     } else {
       if (images) {
+        //NIE mesure de l'ouverture de la page
+        logTraffic("Site", images.nom);
         res.writeHead(200, { "Content-Type": images.content_type });
         res.end(images.data);
       } else {

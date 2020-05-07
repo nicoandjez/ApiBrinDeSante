@@ -1,5 +1,4 @@
 //NES Définition du model MongoDB d'une image
-
 //NES mongoose permet de géner le schéma de la base.
 const mongoose = require("mongoose");
 

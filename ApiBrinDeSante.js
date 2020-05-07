@@ -59,6 +59,10 @@ app.use("/images", imagesRouter);
 const paramRouter = require("./routes/param");
 app.use("/param", paramRouter);
 
+//Route pour les stats
+const statsRouter = require("./Routes/stats");
+app.use("/stats", statsRouter);
+
 // Démarrer le serveur
 app.listen(port, () => {
   console.log(

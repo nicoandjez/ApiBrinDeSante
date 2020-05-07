@@ -1,3 +1,6 @@
+//NIE pour enregistrer les pages consultées et les appels
+const logTraffic = require("../functions/LogTraffic");
+
 //Import du module Mongoose qui gère le lien avec la base MongoDB
 const mongoose = require("mongoose");
 //NIE on va se servir de express pour gérer le routage
@@ -13,6 +16,8 @@ router
 
   //NIE GET monurl/fiches retoune la liste des fiches.
   .get(function (req, res) {
+    //NIE mesure de l'ouverture de la page
+    logTraffic("Site", "Liste des fiches");
     //est ce que j'ai un paramètre sur les fiches masquée?
     var is_masque = req.query.is_masque;
 
@@ -62,6 +67,8 @@ router
       if (err) {
         res.send(err);
       }
+      //NIE mesure de l'ouverture de la page
+      logTraffic("Site", "Création d'une fiche");
       res.send({
         message: "Bravo, la fiche  est maintenant stockée en base de données",
         id: maFiche.id,
@@ -69,17 +76,19 @@ router
     });
   });
 
-// route https://monurl/fiches:ficheid
+//NIE route https://monurl/fiches:ficheid
 router
   .route("/:fiche_id")
 
   .get(function (req, res) {
-    fiches.findById(req.params.fiche_id, function (err, fiches) {
+    fiches.findById(req.params.fiche_id, function (err, fiche) {
       if (err) {
         res.send(err);
         console.log(err);
       } else {
-        res.json(fiches);
+        //NIE mesure de l'ouverture de la page
+        logTraffic("Page", fiche.titre, fiche._id);
+        res.json(fiche);
       }
     });
   })
@@ -109,6 +118,8 @@ router
           res.send(err);
           console.log(err);
         } else {
+          //NIE mesure de l'ouverture de la page
+          logTraffic("Site", "Mise à jour d'une fiche");
           res.json(fiches);
         }
       }

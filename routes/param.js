@@ -1,3 +1,6 @@
+//NIE pour enregistrer les pages consultées et les appels
+const logTraffic = require("../functions/LogTraffic");
+
 const router = require("express").Router();
 //NIE import du model fiche
 const mongoose = require("mongoose");
@@ -16,6 +19,9 @@ router.post("/", function (req, res) {
     if (err) {
       res.send(err);
     } else {
+      //NIE mesure de l'ouverture de la page
+      logTraffic("Site", "Modification du paramétrage");
+
       res.send(monParam);
     }
   });
@@ -27,6 +33,8 @@ router.get("/", function (req, res) {
     if (err) {
       res.send(err);
     } else {
+      //NIE mesure de l'ouverture de la page
+      logTraffic("Site", "GET  paramétrage");
       res.send(param);
     }
   });
