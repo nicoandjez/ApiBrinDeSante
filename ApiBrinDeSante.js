@@ -63,6 +63,10 @@ app.use("/param", paramRouter);
 const statsRouter = require("./Routes/stats");
 app.use("/stats", statsRouter);
 
+//Route pour les corrections
+const correctionsRouter = require("./Routes/corrections");
+app.use("/corrections", correctionsRouter);
+
 // Démarrer le serveur
 app.listen(port, () => {
   console.log(

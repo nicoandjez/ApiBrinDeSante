@@ -10,7 +10,7 @@ var ficheSchema = new mongoose.Schema({
   symptomes: String,
   conseils: String,
   aller_chez_le_medecin: String,
-  articles: [{ titre: String, texte: String }],
+  articles: [{ titre: String, texte: String, ordre: Number }],
   image_url: String,
   afficher_en_page_accueil: Boolean,
   groupe: String,
