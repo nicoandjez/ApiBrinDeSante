@@ -60,11 +60,11 @@ const paramRouter = require("./routes/param");
 app.use("/param", paramRouter);
 
 //Route pour les stats
-const statsRouter = require("./Routes/stats");
+const statsRouter = require("./routes/stats");
 app.use("/stats", statsRouter);
 
 //Route pour les corrections
-const correctionsRouter = require("./Routes/corrections");
+const correctionsRouter = require("./routes/corrections");
 app.use("/corrections", correctionsRouter);
 
 // Démarrer le serveur
