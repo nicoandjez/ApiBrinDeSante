@@ -35,7 +35,7 @@ router
     fiches
       .find(
         filtreRecherche,
-        "_id titre titre_fiche description image_url afficher_en_page_accueil groupe is_masque ",
+        "_id titre titre_fiche description symptomes conseils aller_chez_le_medecin image_url afficher_en_page_accueil groupe is_masque ",
         function (err, fiches) {
           if (err) {
             res.send(err);
