@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 var ParametrageSchema = new mongoose.Schema({
   texte_accueil: String,
   texte_apropos: String,
+  email_contact: String,
 });
 
 //je lie le modèle que je viens de créer à la collection Fiches

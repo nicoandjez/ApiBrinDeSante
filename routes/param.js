@@ -12,6 +12,7 @@ router.post("/", function (req, res) {
   var data = {
     texte_accueil: req.body.texte_accueil,
     texte_apropos: req.body.texte_apropos,
+    email_contact: req.body.email_contact,
   };
   var options = { new: true, upsert: true };
   //NIE je cherche si il y a un paramétrage
