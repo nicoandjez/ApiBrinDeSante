@@ -26,16 +26,13 @@ router
     };
 
     if (is_masque === "all") {
-      //texteRecherche = texteRecherche.replace(/ /gi, "|");
-      //texteRecherche = new RegExp(texteRecherche, "i");
       filtreRecherche = {};
-      console.log(filtreRecherche);
     }
 
     fiches
       .find(
         filtreRecherche,
-        "_id titre titre_fiche description symptomes conseils aller_chez_le_medecin image_url afficher_en_page_accueil groupe is_masque ",
+        "_id titre titre_fiche description symptomes conseils aller_chez_le_medecin image_url afficher_en_page_accueil groupe is_masque afficher_nouvelle_fiche ",
         function (err, fiches) {
           if (err) {
             res.send(err);
@@ -61,6 +58,8 @@ router
     maFiche.afficher_en_page_accueil = req.body.afficher_en_page_accueil;
     maFiche.groupe = req.body.groupe;
     maFiche.is_masque = req.body.is_masque;
+    maFiche.afficher_nouvelle_fiche = req.body.afficher_nouvelle_fiche;
+    maFiche.appeler_le_15 = req.body.appeler_le_15;
 
     // Insertion dans la collection fiches de la base MongoDB
     maFiche.save(function (err) {
@@ -107,6 +106,8 @@ router
       afficher_en_page_accueil: req.body.afficher_en_page_accueil,
       groupe: req.body.groupe,
       is_masque: req.body.is_masque,
+      afficher_nouvelle_fiche: req.body.afficher_nouvelle_fiche,
+      appeler_le_15: req.body.appeler_le_15,
     };
 
     fiches.findByIdAndUpdate(

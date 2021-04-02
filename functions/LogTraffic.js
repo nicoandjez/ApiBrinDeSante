@@ -26,7 +26,7 @@ function LogTraffic(type, nomPage, idPage) {
   //NIE +2 dans notre fuseau horaire
   monTraffic.heure = dateCourante.getUTCHours() + 2;
 
-  console.log(monTraffic);
+  //console.log(monTraffic);
 
   monTraffic.save(function (err) {
     if (err) {

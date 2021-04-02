@@ -13,7 +13,10 @@ router.post("/", function (req, res) {
     texte_accueil: req.body.texte_accueil,
     texte_apropos: req.body.texte_apropos,
     email_contact: req.body.email_contact,
+    mot_de_passe: req.body.mot_de_passe,
   };
+
+  console.log(data);
   var options = { new: true, upsert: true };
   //NIE je cherche si il y a un paramétrage
   param.findOneAndUpdate(query, data, options, function (err, monParam) {

@@ -15,6 +15,8 @@ var ficheSchema = new mongoose.Schema({
   afficher_en_page_accueil: Boolean,
   groupe: String,
   is_masque: Boolean,
+  afficher_nouvelle_fiche: Boolean,
+  appeler_le_15: String,
 });
 
 //je lie le modèle que je viens de créer à la collection Fiches
